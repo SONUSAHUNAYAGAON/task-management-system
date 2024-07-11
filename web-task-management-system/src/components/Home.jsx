@@ -173,53 +173,71 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {taskData?.slice(startIndex, endIndex)?.map((task, index) => (
-              <tr key={task._id} className="text-left border-b">
-                <td className="px-4 py-2">{index + 1}</td>
-                <td className=" px-2 py-2">{task.title}</td>
-
-                <td className=" px-2 py-2">{formateTaskData(task.dueDate)}</td>
-
-                <td className="px-4 py-2">
-                  <select
-                    value={task.status}
-                    onChange={(e) =>
-                      handleStatusChange(task._id, e.target.value)
-                    }
-                    className="form-control"
+            {taskData?.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center py-4">
+                  <div
+                    className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                    role="alert"
                   >
-                    {statusOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                <td className=" px-4 py-2 flex">
-                  <button
-                    onClick={() => navigate(`/edit/task?taskId=${task?._id}`)}
-                    className="btn bg-blue-500 hover:bg-indigo-600 text-white mr-2"
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    onClick={() => handleDelete(task?._id)} // Ensure task._id is defined here
-                    className="btn bg-red-500 hover:bg-red-600 text-white mr-2"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    onClick={() =>
-                      navigate(`/task/view/details?taskId=${task?._id}`)
-                    }
-                    className="btn bg-yellow-500 hover:bg-yellow-600 text-white mr-2"
-                  >
-                    View
-                  </button>
+                    <strong className="font-bold">No tasks found!</strong>
+                    <span className="block sm:inline">
+                      Create a task to get started.
+                    </span>
+                  </div>
                 </td>
               </tr>
-            ))}
+            ) : (
+              taskData?.slice(startIndex, endIndex)?.map((task, index) => (
+                <tr key={task._id} className="text-left border-b">
+                  <td className="px-4 py-2">{index + 1}</td>
+                  <td className=" px-2 py-2">{task.title}</td>
+
+                  <td className=" px-2 py-2">
+                    {formateTaskData(task.dueDate)}
+                  </td>
+
+                  <td className="px-4 py-2">
+                    <select
+                      value={task.status}
+                      onChange={(e) =>
+                        handleStatusChange(task._id, e.target.value)
+                      }
+                      className="form-control"
+                    >
+                      {statusOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className=" px-4 py-2 flex">
+                    <button
+                      onClick={() => navigate(`/edit/task?taskId=${task?._id}`)}
+                      className="btn bg-blue-500 hover:bg-indigo-600 text-white mr-2"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(task?._id)} // Ensure task._id is defined here
+                      className="btn bg-red-500 hover:bg-red-600 text-white mr-2"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={() =>
+                        navigate(`/task/view/details?taskId=${task?._id}`)
+                      }
+                      className="btn bg-yellow-500 hover:bg-yellow-600 text-white mr-2"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
         {/*Pagination previous and Next Button  */}
