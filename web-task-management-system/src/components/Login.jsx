@@ -13,6 +13,8 @@ const Login = () => {
   useEffect(() => {
     if (!token) {
       navigate("/");
+    }else {
+      navigate("/home");
     }
   }, [navigate, token]);
 
