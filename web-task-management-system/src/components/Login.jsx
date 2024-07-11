@@ -67,6 +67,7 @@ const Login = () => {
                         id="typeEmailX"
                         className="form-control form-control-lg"
                         onChange={(e) => setEmail(e.target.value)}
+                         placeholder="magnet@brains.com"
                       />
                     </div>
                     <div className="form-outline form-white mb-4">
@@ -81,6 +82,7 @@ const Login = () => {
                         id="typePasswordX"
                         className="form-control form-control-lg"
                         onChange={(e) => setPassword(e.target.value)}
+                        placeholder="*************"
                       />
                     </div>
 
