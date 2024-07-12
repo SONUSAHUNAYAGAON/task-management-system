@@ -56,20 +56,16 @@ const Home = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(
-            `http://localhost:5000/api/task/${taskId}`,
-            {
-              headers: {
-                Authorization: `JWT ${token}`,
-              },
-            }
-          );
-       
-            //  call for latest data
-            getAllTaskData();
+          await axios.delete(`http://localhost:5000/api/task/${taskId}`, {
+            headers: {
+              Authorization: `JWT ${token}`,
+            },
+          });
 
-            Swal.fire("Deleted!", "The Task has been deleted.", "success");
-      
+          //  call for latest data
+          getAllTaskData();
+
+          Swal.fire("Deleted!", "The Task has been deleted.", "success");
         } catch (error) {
           console.error("Error deleting task:", error);
           Swal.fire("Error!", "Failed to delete the task.", "error");
