@@ -64,12 +64,12 @@ const Home = () => {
               },
             }
           );
-          if (response?.data?.status === 200) {
+       
             //  call for latest data
             getAllTaskData();
 
             Swal.fire("Deleted!", "The Task has been deleted.", "success");
-          }
+      
         } catch (error) {
           console.error("Error deleting task:", error);
           Swal.fire("Error!", "Failed to delete the task.", "error");
